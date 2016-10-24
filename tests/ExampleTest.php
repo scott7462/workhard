@@ -11,6 +11,9 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
+
+
+    
     public function testBasicExample()
     {
         $this->visit('/')
