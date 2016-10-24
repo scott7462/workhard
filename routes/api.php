@@ -19,8 +19,4 @@ Route::get('/user', function (Request $request) {
 
 Route::post("/user",'UserController@register');
 
-
 Route::post("/user/login",'UserController@login');
-
-
-Route::get('/exercises', ,'ExercisesController@get')->middleware('auth:api');
