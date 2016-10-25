@@ -9,8 +9,6 @@ use App\Http\Requests;
 use Validator;
 
 use App\User;
-use DateTime;
-use Carbon\Carbon;
 
 use Auth;
 
@@ -31,7 +29,7 @@ class UserController extends Controller
             'last_name' => 'required|max:50',
             'email' => 'required|email|max:50|unique:users',
             'password' => 'required|min:6',
-            'birthdate' =>'required',
+            'birthdate' => 'required',
             ]);
 
         if($validator->fails()){
@@ -41,10 +39,11 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->input('name'),
             'last_name' => $request->input('last_name'),
-            'birthdate' => date("Y-m-d H:i:s",$request->input('birthdate')),
+            'birthdate' => $request->input('birthdate'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             ]);
+        
         $token = $user->createToken('accessToken')->accessToken;
         return response(['user'=>$user,'credentials'=>$token],Response::HTTP_OK);
     }
