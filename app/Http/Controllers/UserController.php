@@ -71,7 +71,7 @@ class UserController extends Controller
         return response([
             'status' => Response::HTTP_UNAUTHORIZED,
             'response_time' => microtime(true) - LARAVEL_START,
-            '201' => 'Wrong email or password',
+            'code' => 201,
             'error' => 'Wrong email or password',
             ],Response::HTTP_UNAUTHORIZED);
     }
