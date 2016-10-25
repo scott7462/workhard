@@ -45,7 +45,7 @@ class UserController extends Controller
             ]);
         
         $token = $user->createToken('accessToken')->accessToken;
-        return response(['user'=>$user,'credentials'=>$token],Response::HTTP_OK);
+        return response(['user'=>$user,'token'=>['access_token'=>$token]],Response::HTTP_OK);
     }
 
 
