@@ -14,7 +14,8 @@ class UpdateExercisesUrlName extends Migration
     public function up()
     {
         Schema::table('exercises', function (Blueprint $table) {
-            $table->renameColumn('yrl', 'url');
+             $table->dropColumn('yrl');
+            $table->string('url');
        });
     }
 
