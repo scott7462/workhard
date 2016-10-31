@@ -19,7 +19,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post("/user",'UserController@register');
 
-Route::put("/user",'UserController@updateUser')
+Route::put("/user",'UserController@update')
 ->middleware('auth:api');
 
 Route::post("/user/login",'UserController@login');

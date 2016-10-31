@@ -82,8 +82,8 @@ class WorkoutController extends Controller
     {
        $user = Auth::user();
        $results = $user->workouts;
-	   $results = $this->orderWorkouts($results);
-	   $results = $this->orderExercisesWorkouts($results);
+	     $results = $this->orderWorkouts($results);
+	     $results = $this->orderExercisesWorkouts($results);
         return response(['workouts'=>$results],Response::HTTP_OK);
     }
 

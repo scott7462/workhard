@@ -76,4 +76,26 @@ class UserController extends Controller
             ],Response::HTTP_UNAUTHORIZED);
     }
 
+    protected function update(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:50',
+            'last_name' => 'required|max:50',
+            'birthdate' => 'required',
+            ]);
+
+        if($validator->fails()){
+            return response(['result' => $validator->errors()->all()],Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = $request->all();
+        $user = Auth::user();
+        $user->name =  $request->input('name');
+        $user->birthdate =  $request->input('birthdate');
+        $user->last_name =  $request->input('last_name');
+        $token = $user->createToken('accessToken')->accessToken;
+        return response(['user'=>$user,'token'=>['access_token'=>$token]],Response::HTTP_OK);
+    }
+
 }
