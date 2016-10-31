@@ -26,11 +26,13 @@ Route::post("/user/login",'UserController@login');
 
 Route::post("/exercise",'ExerciseController@create');
 
-Route::get('/exercise','ExerciseController@findAll')->middleware('auth:api');
+Route::get('/exercise','ExerciseController@findAll')
+->middleware('auth:api');
 
 Route::post("/workout",'WorkoutController@create');
 
-Route::get('/workout','WorkoutController@getGenerals');
+Route::get('/workout','WorkoutController@getGenerals')
+->middleware('auth:api');;
 
 Route::post("/workout/save",'WorkoutController@save')
 ->middleware('auth:api');
