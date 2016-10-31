@@ -19,4 +19,21 @@ Route::get('/user', function (Request $request) {
 
 Route::post("/user",'UserController@register');
 
+Route::put("/user",'UserController@updateUser')
+->middleware('auth:api');
+
 Route::post("/user/login",'UserController@login');
+
+Route::post("/exercise",'ExerciseController@create');
+
+Route::get('/exercise','ExerciseController@findAll')->middleware('auth:api');
+
+Route::post("/workout",'WorkoutController@create');
+
+Route::get('/workout','WorkoutController@getGenerals');
+
+Route::post("/workout/save",'WorkoutController@save')
+->middleware('auth:api');
+
+Route::get("/workout/my",'WorkoutController@findMyWorkouts')
+->middleware('auth:api');

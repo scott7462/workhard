@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
 class RedirectIfAuthenticated
 {
@@ -17,10 +18,15 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
+        if (Auth::guard($guard)->check() || $request->wantsJson()) {
             return redirect('/home');
+        }else{
+            return  response([
+            'status' => Response::HTTP_UNAUTHORIZED,    
+            'code' => 401,
+            'error' => 'Unauthorized User',
+            ],Response::HTTP_UNAUTHORIZED);
         }
-
         return $next($request);
     }
 }

@@ -10,13 +10,18 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
 
+       public function workouts(){
+        return $this->belongsToMany("App\Workout","users_workouts")
+            ->withPivot('completed','date_complete','owner');;
+   }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name','last_name','birthdate','email', 'password',
+        'name','last_name','birthdate','email', 'password'
     ];
 
     /**

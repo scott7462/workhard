@@ -64,7 +64,7 @@ class UserController extends Controller
 
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'] ])) {
             $user = Auth::user();
-            $token = $user->createToken('accessToken')->accessToken;
+            $token = $user->createToken('token')->accessToken;
             return response(['user'=>$user,'token'=>['access_token'=>$token]],Response::HTTP_OK);
         }
 
