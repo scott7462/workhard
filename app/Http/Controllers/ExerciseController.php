@@ -37,7 +37,7 @@ class ExerciseController extends Controller
 
     protected function findAll(Request $request)
     {
-        return Exercise::all();
+        return response(['exercises'=>Exercise::all()],Response::HTTP_OK);
     }
 
 
