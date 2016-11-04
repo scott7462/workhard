@@ -68,13 +68,13 @@ class WorkoutController extends Controller
     protected function save(Request $request)
     {
        $user = Auth::user();
-	   $workout = $this->createWorkout($request);
-	   $user->workouts()
-       			->attach($workout['id'], 
-       				array("owner"=>true));
+  	   $workout = $this->createWorkout($request);
+  	   $user->workouts()
+         			->attach($workout['id'], 
+         				array("owner"=>true));
 
        $result = Workout::where('id',$workout->id)->with('exercises')->get();
-	   $result = $this->orderExercisesWorkouts($result);
+	     $result = $this->orderExercisesWorkouts($result);
        return response(['workout'=>$result],Response::HTTP_OK);
     }
 
