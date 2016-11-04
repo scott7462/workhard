@@ -47,7 +47,7 @@ class WorkoutController extends Controller
             'name' => $request->input('name'),
             'rest_between_exercise' => $request->input('rest_between_exercise'),
             'rest_rounds_exercise' => $request->input('rest_rounds_exercise'),
-            'rounds' => $request->input('rest_rounds_exercise'),
+            'rounds' => $request->input('rounds'),
             ]);
        
        foreach ($request->input('exercises') as $exercise) {
