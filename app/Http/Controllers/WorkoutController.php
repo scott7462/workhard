@@ -74,7 +74,7 @@ class WorkoutController extends Controller
          				array("owner"=>true));
 
        $result = Workout::where('id',$workout->id)->with('exercises')->get();
-	     $result = $this->orderExercisesWorkouts($result);
+	   $result = $this->orderExercisesWorkouts($result);
        return response(['workout'=>$result],Response::HTTP_OK);
     }
 
@@ -82,29 +82,30 @@ class WorkoutController extends Controller
     {
        $user = Auth::user();
        $results = $user->workouts;
-	     $results = $this->orderWorkouts($results);
+	     // $results = $this->orderWorkouts($results);
 	     $results = $this->orderExercisesWorkouts($results);
         return response(['workouts'=>$results],Response::HTTP_OK);
     }
 
-    protected function orderWorkouts($results){
-		foreach($results as $workout) { 
-			$workout->completed = $workout->pivot->completed; 
-		}
-		return $results;
-    }
+  //   protected function orderWorkouts($results){
+		// foreach($results as $workout) { 
+		// 	$workout->completed = $workout->pivot->completed; 
+		// 	$workout->date_complete = $workout->pivot->date_complete; 
+		// }
+		// return $results;
+  //   }
 
     protected function completeWorkout($results){
 
-    //    $user = Auth::user();
-	   // $validator = Validator::make($request->all(), [
-    //         'workout_id' => 'required',]);
-	   // 	if($validator->fails()){
-    //         return response(['result' => $validator->errors()->all()],Response::HTTP_BAD_REQUEST);
-    //     }
-    //    $user = Auth::user();
-	   // $user->workouts->where('workout_id',$request->input('workout_id'))->update(['completed' => true]);
-	   // return response(['workout'=>$result],Response::HTTP_OK);
+       $user = Auth::user();
+	   $validator = Validator::make($request->all(), [
+            'workout_id' => 'required',]);
+	   	if($validator->fails()){
+            return response(['result' => $validator->errors()->all()],Response::HTTP_BAD_REQUEST);
+        }
+       $user = Auth::user();
+	   $user->workouts->where('workout_id',$request->input('workout_id'))->update(['completed' => true]);
+	   return response(['workout'=>$result],Response::HTTP_OK);
     }
 
 	

@@ -12,7 +12,7 @@ class User extends Authenticatable
 
        public function workouts(){
         return $this->belongsToMany("App\Workout","users_workouts")
-            ->withPivot('completed','date_complete','owner');;
+            ->withPivot('owner');;
    }
 
     /**
